@@ -1,0 +1,21 @@
+{
+  "name": "listacontactos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "App.js",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongo": "^0.1.0",
+    "mongoose": "^5.4.2",
+    "node": "^11.6.0",
+    "nodemon": "^1.18.9"
+  },
+  "devDependencies": {},
+  "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "node App.js"
+  },
+  "author": "Joao Paiva",
+  "license": "ISC"
+}

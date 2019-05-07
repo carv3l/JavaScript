@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+    </head>
+    <body>
+            <!--<link rel="stylesheet" href="styles.css">-->
+        <style>
+
+            
+            h1{
+	font-weight: 200;
+	letter-spacing: 0.4px;
+	font-family: "Raleway", Sans-serif;
+	color: #232323;
+    }   
+    h2{
+	font-weight: 150;
+	letter-spacing: 0.4px;
+	font-family: "Raleway", Sans-serif;
+	color: #232323;
+    } 
+    
+    p{
+	font-weight: 50;
+	letter-spacing: 0.4px;
+	font-family: "Raleway", Sans-serif;
+	color: #232323;
+    } 
+    
+    .button {
+  background-color: white; 
+  border: 2px solid #232323;
+  color: black;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s; 
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.alertsucess {
+  padding: 20px;
+  background-color: #4CAF50;
+  color: white;
+}
+.alerterror {
+  padding: 20px;
+  background-color: red;
+  color: white;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+    </style>
+
+
+<table style="width:100%">
+<th style="width:30%">
+
+    <h1> Contactos </h1>
+
+    <h1>Lista</h1>
+
+
+            <h2> Introduzir Contactos </h2>
+
+            <section id=section1>
+
+            <form id= "um">
+
+                <p><label for="nome">Nome:</label><br>
+                    <input type= "texto" id="nomeid" name="nome">
+                </p>
+
+                <p><label for="telefone">Telefone:</label><br>
+                    <input type="texto" id="telefoneid" name="telefone">
+                </p>
+
+                <p><label for="tipotelefone">Tipo Telefone:</label><br>
+                    <input type="texto" id="tipotelefoneid" name="tipotelefone">
+                </p>
+
+                <p><label for="email">Email:</label><br>
+                    <input type="texto" id="emailid" name="email">
+                </p>
+
+                <p><label for="tipoemail">Tipo Email:</label><br>
+                    <input type="texto" id="tipoemailid" name="tipoemail">
+                </p>
+
+                <p><label for="ederenco">Endereço:</label><br>
+                    <input type="texto" id="enderecoid" name="endereco">
+                </p>
+
+                <p><label for="tipoederenco">Tipo Endereço:</label><br>
+                    <input type="texto" id="tipoenderecoid" name="tipoendereco">
+                </p>
+
+                <p><label for="grupos">Grupos:</label><br>
+                    <input type="texto" id="gruposid" name="grupos">
+                </p>
+
+                
+
+                <p>
+                    <button Class="button" type="button" id="botao" style="vertical-align:middle" onclick="insertcontacto() " ><span>Guardar</span></button>
+                <!--<input type="button" id="botao" value = Guardar onclick="insertcontacto()"> >!-->
+                </p>
+
+        </form>
+
+        </section>
+
+        
+        
+                <div id="mensagemsucesso" style="visibility: hidden;" class="alertsucess">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                <strong>Sucesso</strong> Dados inseridos com sucesso!
+                </div>
+
+              <div id="mensagemerro" style="visibility: hidden;" class="alerterror">
+                    <span class="closebtn">&times;</span> 
+                    
+                    <strong>ERRO</strong> Um ou mais campos estão vazios!
+            </div>
+            
+        
+
+            
+            <section id=section2>
+
+                   
+
+                    <form id= "m">
+
+                    <p><label for="contacto"></label><br>
+                        <output type= "texto" id="apresentarid" name="outapresentar">
+                    </p>
+
+                    <p><input class="button" id="botao1" value ="Ver Lista de Contactos" onclick="vercontacto()"></p>
+
+                    <script>
+                    
+                    
+                    </script>
+
+                    </form>
+                </th>
+                <th>
+                    <table cellpadding="1" cellspacing="1" border="0" bgcolor="white" width="60%" align="center" style="visibility: hidden;">
+                            <thead>
+                            </thead>
+                                <tbody id="tabela"></tbody>
+                            </table>
+
+            </section>
+            </th>
+
+        
+        </table>
+
+
+            <script>
+
+                        
+
+
+
+                    function insertcontacto(){
+                        
+                        var xhttp = new XMLHttpRequest();
+                                    xhttp.open("POST", "https://integrated-oath-202013.appspot.com/registo", true);
+                                    xhttp.setRequestHeader('Content-type','application/json; charset=utf-8');
+                                    xhttp.onreadystatechange = function(){
+                                        if (this.readyState == 4 && this.status == 200) {
+                                            
+                                            document.getElementById("mensagemsucesso").style.visibility='visible';
+                                        }
+                                        };
+                                        
+                                        var dados = {}
+                                        dados.nome = um.nomeid.value;
+                                        dados.telefone  = um.telefoneid.value;
+                                        dados.tipotelefone = um.tipotelefoneid.value;
+                                        dados.email= um.emailid.value;
+                                        dados.tipoemail = um.tipoemailid.value;
+                                        dados.endereco = um.enderecoid.value;
+                                        dados.tipoendereco = um.tipoenderecoid.value;
+                                        dados.grupos = um.gruposid.value;
+                                    
+
+                                        if(dados.nome == null ||dados.telefone == 0 || dados.tipotelefone ==0 || dados.email == 0 || dados.tipoemail == 0 ||  dados.endereco == 0 || dados.tipoendereco == 0 || dados.grupos == 0){
+                                            document.getElementById("mensagemerro").style.visibility='visible';
+
+                                            var close = document.getElementsByClassName("closebtn");
+                        var i;
+                        for (i = 0; i < close.length; i++) {
+                            close[i].onclick = function(){
+                              var div = this.parentElement;
+                              div.style.opacity = "0";
+                              setTimeout(function(){ div.style.display = "none"; }, 600);
+                            }
+                          }
+                                            
+                                        }else{
+                                            var dadosemJSON = JSON.stringify(dados)
+                                            xhttp.send(dadosemJSON);
+                                            limparcampos();
+
+                                        }
+
+                                }
+            
+            
+                    function vercontacto(){
+                        console.log("so far so good");
+                        var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function(){
+                    if (this.readyState == 4 && this.status == 200) {
+                        var arrayJSON = JSON.parse(this.responseText);
+lines ="<table> <tr><th>Nome</th><th>Telefone</th><th>Tipo Telefone</th><th>Email</th><th>Tipo Email</th><th>Endereço</th><th>Tipo Endereço</th><th>Grupos</th></tr>";
+            for (i = 0; i < arrayJSON.length; i++) {
+              
+              lines = lines +"<tr>";
+              lines = lines +"<td>" + arrayJSON[i].nome + "</td>";
+              lines = lines +"<td>" + arrayJSON[i].telefone + "</td>";
+              lines = lines +"<td>" + arrayJSON[i].tipotelefone + "</td>";
+              lines = lines +"<td>" + arrayJSON[i].email + "</td>";
+              lines = lines +"<td>" + arrayJSON[i].tipoemail + "</td>";
+              lines = lines +"<td>" + arrayJSON[i].endereco + "</td>";
+              lines = lines +"<td>" + arrayJSON[i].tipoendereco + "</td>";
+              lines = lines +"<td>" + arrayJSON[i].grupos + "</td>";
+
+              lines = lines + "</tr>";
+            }
+            lines = lines + "</table>";
+           document.getElementById("tabela").innerHTML = lines;
+           document.getElementById("tabela").style.visibility='visible';
+
+                        
+                            }
+                        };
+            
+                        xhttp.open("GET", "https://integrated-oath-202013.appspot.com/contacto", true);
+            
+                        u = m.apresentarid.value
+            
+                        xhttp.send(u)
+                    }
+            
+            
+                    function limparcampos(){
+                        um.nomeid.value = '';
+                        um.telefoneid.value = '';
+                        um.tipotelefoneid.value = '';
+                        um.emailid.value = '';
+                        um.tipoemailid.value = '';
+                        um.enderecoid.value = '';
+                        um.tipoenderecoid.value = '';
+                        um.gruposid.value = '';
+                    }
+                    
+                    
+                        
+                    
+
+
+
+                   
+            
+        
+    </script>
+
+    <p><label align="center">Por João Paiva e Wesley Santos - Instituto Politécnico Guarda</label><br>
+    </body>
+
+
+
+</html>
